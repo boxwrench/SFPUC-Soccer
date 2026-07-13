@@ -34,7 +34,7 @@
 **Interfaces:**
 - Produces: a clean working tree and a pushed `main`; every later task commits on top of this baseline.
 
-- [ ] **Step 1: Confirm the working tree contents match expectations**
+- [x] **Step 1: Confirm the working tree contents match expectations**
 
 ```bash
 git -C C:/Github/soccer-course status --short | grep -cv "^$"
@@ -42,7 +42,7 @@ git -C C:/Github/soccer-course status --short | grep -cv "^$"
 
 Expected: ~123 lines. If wildly different, stop and ask the user what changed.
 
-- [ ] **Step 2: Commit the game/asset customization**
+- [x] **Step 2: Commit the game/asset customization**
 
 Everything except the guide and launcher (which get their own commit):
 
@@ -59,7 +59,7 @@ the menus.
 Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 ```
 
-- [ ] **Step 3: Commit the guide and launcher**
+- [x] **Step 3: Commit the guide and launcher**
 
 ```bash
 git add -A -- SFPUC-Soccer-Game-Guide.md "Launch SFPUC Soccer.vbs"
@@ -68,7 +68,7 @@ git commit -m "add SFPUC build guide and desktop launcher
 Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 ```
 
-- [ ] **Step 4: Verify nothing is left uncommitted**
+- [x] **Step 4: Verify nothing is left uncommitted**
 
 ```bash
 git status --short
@@ -76,7 +76,7 @@ git status --short
 
 Expected: empty output. If files remain, add them to whichever of the two commits fits (`git commit --amend` is acceptable here since nothing is pushed yet) or make a third commit.
 
-- [ ] **Step 5: Swap remotes**
+- [x] **Step 5: Swap remotes**
 
 ```bash
 git remote rename origin upstream
@@ -86,7 +86,7 @@ git remote -v
 
 Expected: `origin` = boxwrench/SFPUC-Soccer.git, `upstream` = nicolasbize/soccer-course.git.
 
-- [ ] **Step 6: Push main**
+- [x] **Step 6: Push main**
 
 ```bash
 git push -u origin main
