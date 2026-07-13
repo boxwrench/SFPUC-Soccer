@@ -23,7 +23,8 @@ func _init() -> void:
 			var role := player["role"] as Player.Role
 			var speed := player["speed"] as float
 			var power := player["power"] as float
-			var player_resource := PlayerResource.new(fullname, skin, role, speed, power)
+			var presentation := player.get("presentation", "default") as String
+			var player_resource := PlayerResource.new(fullname, skin, role, speed, power, presentation)
 			squads.get(country_name).append(player_resource)
 		assert(players.size() == 6)
 	json_file.close()

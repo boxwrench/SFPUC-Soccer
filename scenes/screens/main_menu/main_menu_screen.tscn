@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://ei3j4377wuyi"]
+[gd_scene load_steps=15 format=3 uid="uid://ei3j4377wuyi"]
 
 [ext_resource type="Script" uid="uid://bkxphq0e2pxc1" path="res://scenes/screens/main_menu/main_menu_screen.gd" id="1_ai35v"]
-[ext_resource type="Texture2D" uid="uid://cdkq3rdcj5kud" path="res://assets/art/ui/mainmenu/menu-background.png" id="1_du1io"]
-[ext_resource type="Texture2D" uid="uid://db3nh5qo06ph8" path="res://assets/art/ui/mainmenu/title.png" id="2_ai35v"]
+[ext_resource type="Texture2D" uid="uid://xnjwpubyrlr1" path="res://assets/art/ui/mainmenu/menu-backgroundSF-fitted.png" id="1_du1io"]
 [ext_resource type="Texture2D" uid="uid://crpesblnk5qk4" path="res://assets/art/ui/mainmenu/menu-mask.png" id="3_nawi7"]
 [ext_resource type="Texture2D" uid="uid://dbfvuee4aid5b" path="res://assets/art/ui/mainmenu/layout-p1.png" id="4_1h8ap"]
 [ext_resource type="Texture2D" uid="uid://c4pak3q7sqjxy" path="res://assets/art/ui/mainmenu/layout-p2.png" id="5_u4ap7"]
@@ -255,12 +254,12 @@ offset_bottom = 40.0
 texture = ExtResource("1_du1io")
 
 [node name="TitleTexture" type="TextureRect" parent="Background"]
+visible = false
 layout_mode = 1
 offset_left = 25.0
 offset_top = -70.0
 offset_right = 164.0
 offset_bottom = -5.0
-texture = ExtResource("2_ai35v")
 
 [node name="Mask" type="TextureRect" parent="Background"]
 modulate = Color(0, 0, 0, 0.784314)
@@ -284,10 +283,11 @@ anchor_bottom = 1.0
 offset_left = -90.0
 offset_top = -100.0
 offset_right = -8.0
-offset_bottom = -60.0
+offset_bottom = -67.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("4_1h8ap")
+texture_filter = 1
 
 [node name="PlayerTwoControls" type="TextureRect" parent="Background"]
 layout_mode = 1
@@ -299,10 +299,11 @@ anchor_bottom = 1.0
 offset_left = -90.0
 offset_top = -50.0
 offset_right = -8.0
-offset_bottom = -10.0
+offset_bottom = -17.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("5_u4ap7")
+texture_filter = 1
 
 [node name="SinglePlayerTexture" type="TextureRect" parent="Background"]
 unique_name_in_owner = true

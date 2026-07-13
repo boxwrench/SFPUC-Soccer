@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Soccer Course"
+config/name="SFPUC Super Soccer"
 run/main_scene="uid://brj16q8ttvqfc"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -29,11 +29,11 @@ gdscript/warnings/unused_signal=0
 
 [display]
 
-window/size/viewport_width=280
-window/size/viewport_height=180
+window/size/viewport_width=1400
+window/size/viewport_height=900
 window/size/window_width_override=1400
 window/size/window_height_override=900
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
 [gui]

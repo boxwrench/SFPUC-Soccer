@@ -2,14 +2,12 @@ class_name TournamentScreen
 extends Screen
 
 const STAGE_TEXTURES := {
-	Tournament.Stage.QUARTER_FINALS: preload("res://assets/art/ui/teamselection/quarters-label.png"),
 	Tournament.Stage.SEMI_FINALS: preload("res://assets/art/ui/teamselection/semis-label.png"),
 	Tournament.Stage.FINAL: preload("res://assets/art/ui/teamselection/finals-label.png"),
 	Tournament.Stage.COMPLETE: preload("res://assets/art/ui/teamselection/winner-label.png"),
 }
 
 @onready var flag_containers : Dictionary = {
-	Tournament.Stage.QUARTER_FINALS: [%QFLeftContainer, %QFRightContainer],
 	Tournament.Stage.SEMI_FINALS: [%SFLeftContainer, %SFRightContainer],
 	Tournament.Stage.FINAL: [%FinalLeftContainer, %FinalRightContainer],
 	Tournament.Stage.COMPLETE: [%WinnerContainer],
@@ -47,8 +45,8 @@ func refresh_bracket_stage(stage: Tournament.Stage) -> void:
 			var current_match : Match = matches[i]
 			var flag_home : BracketFlag = flag_nodes[i * 2]
 			var flag_away : BracketFlag = flag_nodes[i * 2 + 1]
-			flag_home.texture = FlagHelper.get_texture(current_match.country_home)
-			flag_away.texture = FlagHelper.get_texture(current_match.country_away)
+			flag_home.texture = FlagHelper.get_selection_texture(current_match.country_home)
+			flag_away.texture = FlagHelper.get_selection_texture(current_match.country_away)
 			if not current_match.winner.is_empty():
 				var flag_winner := flag_home if current_match.winner == current_match.country_home else flag_away
 				var flag_loser := flag_home if flag_winner == flag_away else flag_away
@@ -59,7 +57,7 @@ func refresh_bracket_stage(stage: Tournament.Stage) -> void:
 				flag_player.set_as_current_team()
 				GameManager.current_match = current_match
 	else:
-		flag_nodes[0].texture = FlagHelper.get_texture(tournament.winner)
+		flag_nodes[0].texture = FlagHelper.get_selection_texture(tournament.winner)
 
 func get_flag_nodes_for_stage(stage: Tournament.Stage) -> Array[BracketFlag]:
 	var flag_nodes : Array[BracketFlag] = []

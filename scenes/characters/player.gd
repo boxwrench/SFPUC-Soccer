@@ -11,6 +11,7 @@ const CONTROL_SCHEME_MAP : Dictionary = {
 }
 const GRAVITY := 8.0
 const WALK_ANIM_THRESHOLD := 0.6
+const FEMALE_PLAYER_TEXTURE := preload("res://assets/art/characters/soccer-fplayer2-sheet.png")
 
 enum ControlScheme {CPU, P1, P2}
 enum Role {GOALIE, DEFENSE, MIDFIELD, OFFENSE}
@@ -38,6 +39,7 @@ enum State {MOVING, TACKLING, RECOVERING, PREPPING_SHOT, SHOOTING, PASSING, HEAD
 
 var ai_behavior_factory := AIBehaviorFactory.new()
 var country := ""
+var presentation := "default"
 var current_ai_behavior : AIBehavior = null
 var current_state: PlayerState = null
 var fullname := ""
@@ -52,6 +54,7 @@ var state_factory := PlayerStateFactory.new()
 var weight_on_duty_steering := 0.0
 
 func _ready() -> void:
+	set_player_texture()
 	set_control_texture()
 	setup_ai_behavior()
 	set_shader_properties()
@@ -71,7 +74,14 @@ func _process(delta: float) -> void:
 	process_gravity(delta)
 	move_and_slide()
 
+func set_player_texture() -> void:
+	if presentation == "female":
+		player_sprite.texture = FEMALE_PLAYER_TEXTURE
+		player_sprite.material = null
+
 func set_shader_properties() -> void:
+	if presentation == "female":
+		return
 	player_sprite.material.set_shader_parameter("skin_color", skin_color)
 	var countries := DataLoader.get_countries()
 	var country_color := countries.find(country)
@@ -86,6 +96,7 @@ func initialize(context_position: Vector2, context_kickoff_position: Vector2, co
 	target_goal = context_target_goal
 	speed = context_player_data.speed
 	power = context_player_data.power
+	presentation = context_player_data.presentation
 	role = context_player_data.role
 	skin_color = context_player_data.skin_color
 	fullname = context_player_data.full_name
