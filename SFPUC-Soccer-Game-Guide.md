@@ -1,8 +1,8 @@
-# SFPUC Super Soccer ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Build Guide
+# SFPUC Super Soccer — Build Guide
 
 A step-by-step guide to building a 2D arcade soccer game in **Godot 4.4+**, customized for the SFPUC with four teams: **Water, Power, Sewer, and Hetch Hetchy Water and Power**.
 
-> ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¡ **Beginner tip ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the checkpoint tags are your safety net.** The course repo (see [Attribution & Resources](#attribution--resources) at the end) has a git tag for nearly every part below. If your project ever breaks and you can't figure out why, compare your files against the matching tag, or simply clone the tag and continue from there.
+> 💡 **Beginner tip — the checkpoint tags are your safety net.** The course repo (see [Attribution & Resources](#attribution--resources) at the end) has a git tag for nearly every part below. If your project ever breaks and you can't figure out why, compare your files against the matching tag, or simply clone the tag and continue from there.
 
 ---
 
@@ -30,7 +30,7 @@ Use the official SFPUC/SFWPS logo unchanged for every team. The teams are differ
 | Sewer | Green | `#8DC63F` | Official logo on green |
 | Hetch Hetchy Water and Power | Powder blue | `#7EC8E3` | Official logo on powder blue |
 
-Tip: on the HUD, use the short label "Hetch Hetchy" or "HHWP" where space is tight ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the font is tiny at 280ÃƒÆ’Ã¢â‚¬â€180 resolution.
+Tip: on the HUD, use the short label "Hetch Hetchy" or "HHWP" where space is tight — the font is tiny at 280×180 resolution.
 
 Use **Franklin Gothic Book** for UI labels and **Minion Pro Regular** for tournament or formal copy. Reuse the original course art wherever it already fits (player sprites, pitch, goals, particles, and menu layout); create new art only for the rebrand.
 
@@ -54,9 +54,9 @@ The matching editable raw artwork is kept as `menu-backgroundSF.png` and `soccer
 
 # Section A: Building the Base Game
 
-Work through these parts in order. Each part corresponds to one video in the series and roughly one checkpoint tag in the repo. **Commit to git after every part** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the commands are included.
+Work through these parts in order. Each part corresponds to one video in the series and roughly one checkpoint tag in the repo. **Commit to git after every part** — the commands are included.
 
-## Part 1 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Project Setup (V01)
+## Part 1 — Project Setup (V01)
 
 Video: https://www.youtube.com/watch?v=__ZAKUIjxy0
 
@@ -64,14 +64,14 @@ Video: https://www.youtube.com/watch?v=__ZAKUIjxy0
 
 1. Download and install **Godot 4.4+** (latest stable) from https://godotengine.org.
 2. In the Project Manager, click **Create**. Name it `sfpuc-soccer`. Choose a folder.
-3. Set the renderer to **Compatibility** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â required if you later want to publish a browser-playable version (e.g., on an internal site or itch.io).
+3. Set the renderer to **Compatibility** — required if you later want to publish a browser-playable version (e.g., on an internal site or itch.io).
 4. Leave everything else at default and create the project.
 
 ### 1.2 Set up version control (Git + GitHub)
 
 1. Install Git from https://git-scm.com. Beginners: use **GitHub Desktop** (GUI) instead of the command line if you prefer.
 2. Create a free account at https://github.com (or use your organization's account).
-3. Generate an SSH key and add it to your GitHub account (see GitHub's docs ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â takes about a minute).
+3. Generate an SSH key and add it to your GitHub account (see GitHub's docs — takes about a minute).
 4. On GitHub, click **New repository**. Name it `sfpuc-soccer`. Add a README, a `.gitignore` using the **Godot** template, and an MIT license.
 5. Copy the SSH URL from the **Code** button, then run: `git clone <your-ssh-url>`
 6. Quit Godot. Move the contents of your Godot project folder into the cloned git folder; delete the now-empty original folder.
@@ -91,7 +91,7 @@ Video: https://www.youtube.com/watch?v=__ZAKUIjxy0
 ### 1.4 Configure project settings
 
 1. Open **Project > Project Settings** and enable **Advanced Settings**.
-2. **Display > Window:** Width = `280`, Height = `180` (the pixel-art resolution). Width Override = `1400`, Height Override = `900` (a 5ÃƒÆ’Ã¢â‚¬â€ upscale for the actual window).
+2. **Display > Window:** Width = `280`, Height = `180` (the pixel-art resolution). Width Override = `1400`, Height Override = `900` (a 5× upscale for the actual window).
 3. **Stretch Mode** = `viewport`; **Scale Mode** = `integer` (keeps pixels perfectly square).
 4. **Rendering > Textures:** Default Texture Filter = `Nearest` (prevents blurry pixel art).
 
@@ -119,17 +119,17 @@ Video: https://www.youtube.com/watch?v=__ZAKUIjxy0
 
 ### 1.8 Create the Player scene
 
-**Why CharacterBody2D?** Players need 2D position, collision detection while moving, and fine movement control. `CharacterBody2D` has built-in move-and-slide. (The ball will instead use `AnimatableBody2D` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â it needs to bounce, not slide.)
+**Why CharacterBody2D?** Players need 2D position, collision detection while moving, and fine movement control. `CharacterBody2D` has built-in move-and-slide. (The ball will instead use `AnimatableBody2D` — it needs to bounce, not slide.)
 
 1. Scene panel **+** > New Scene > **Other Node** > `CharacterBody2D`. Rename it `player`.
 2. Save to `scenes/characters/player.tscn`.
 3. Add a child **Sprite2D** named `player_sprite`. Texture = `soccer_player.png`. Uncheck Centered.
-   - Animation properties: **HFrames = 6, VFrames = 13** (6 columns ÃƒÆ’Ã¢â‚¬â€ 13 rows in the spritesheet).
+   - Animation properties: **HFrames = 6, VFrames = 13** (6 columns × 13 rows in the spritesheet).
 4. On the root, enable **Y Sort Enabled** (Ordering section) so overlapping players depth-sort correctly.
 
 *Stuck? Watch from 27:45 in V01.*
 
-## Part 2 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Basic Movement (V02)
+## Part 2 — Basic Movement (V02)
 
 Video: https://youtu.be/fW3VAX5n9ks
 
@@ -146,8 +146,8 @@ Video: https://youtu.be/fW3VAX5n9ks
 | Action | Player 1 | Player 2 |
 |---|---|---|
 | left / right / up / down | Arrow keys (`p1_left`, etc.) | WASD (`p2_left`, etc.) |
-| pass | `]` ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ `p1_pass` | `~` ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ `p2_pass` |
-| shoot | `[` ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ `p1_shoot` | Tab ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ `p2_shoot` |
+| pass | `]` → `p1_pass` | `~` → `p2_pass` |
+| shoot | `[` → `p1_shoot` | Tab → `p2_shoot` |
 
 Tip: keep pass/shoot keys far from the directional keys to avoid mid-game finger conflicts.
 
@@ -188,29 +188,29 @@ Tip: keep pass/shoot keys far from the directional keys to avoid mid-game finger
 ### 2.5 Sprite flipping
 
 1. Add `var _heading: int = 1` (1 = right, -1 = left).
-2. `_flip_sprites()`: if `velocity.x > 0` ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ heading 1, `flip_h = false`; if `< 0` ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ heading -1, `flip_h = true`; if `== 0` keep current heading.
+2. `_flip_sprites()`: if `velocity.x > 0` → heading 1, `flip_h = false`; if `< 0` → heading -1, `flip_h = true`; if `== 0` keep current heading.
 3. Call it every frame in `_physics_process`.
 
 *Stuck? Watch from 18:00 in V02.*
 
 ### 2.6 A simple inline state machine (temporary)
 
-This is a stepping stone ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Part 3 replaces it with the real architecture.
+This is a stepping stone — Part 3 replaces it with the real architecture.
 
 1. `enum State { MOVING, TACKLING }` and `var state := State.MOVING`.
 2. `var _tackle_start: float = 0.0`.
-3. In `_physics_process`: MOVING + shoot pressed + moving ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ switch to TACKLING and record `Time.get_ticks_msec()`. In TACKLING: play tackle animation; after 500 ms return to MOVING.
+3. In `_physics_process`: MOVING + shoot pressed + moving → switch to TACKLING and record `Time.get_ticks_msec()`. In TACKLING: play tackle animation; after 500 ms return to MOVING.
 4. Test, then commit: `git commit -m "basic movement and control schemes"`.
 
 *Stuck? Watch from 23:00 in V02.*
 
-## Part 3 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Scalable State Machine (V03)
+## Part 3 — Scalable State Machine (V03)
 
 Video (transcript gives two conflicting links): https://youtu.be/lKZ1xGdmOoc or https://www.youtube.com/watch?v=hjLANpKMlM4
 
 Replaces the inline state machine with one class per state. This pattern carries through the whole project.
 
-### 3.1 Base state class ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â `scripts/states/base_state.gd`
+### 3.1 Base state class — `scripts/states/base_state.gd`
 
 ```gdscript
 class_name BaseState extends Node
@@ -228,13 +228,13 @@ func update(_delta: float) -> BaseState: return null
 
 One script per state, each extending `BaseState`:
 
-- `moving_state.gd` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â directional input, walk/idle animation; returns `TacklingState` when shoot is pressed.
-- `tackling_state.gd` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â tackle animation, timer; returns `MovingState` after ~0.5 s.
+- `moving_state.gd` — directional input, walk/idle animation; returns `TacklingState` when shoot is pressed.
+- `tackling_state.gd` — tackle animation, timer; returns `MovingState` after ~0.5 s.
 - More states arrive in later parts: dribbling, shooting, passing, hurt, celebrating, etc.
 
 Each state knows only its own logic and transitions. No giant if/else chains.
 
-### 3.3 The StateMachine node ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â `state_machine.gd`
+### 3.3 The StateMachine node — `state_machine.gd`
 
 ```gdscript
 extends Node
@@ -260,9 +260,9 @@ func transition_to(new_state: BaseState):
 1. Add a `StateMachine` child node to the player scene, plus a plain `Node` named `States`.
 2. Under `States`, add `MovingState` and `TacklingState` children with their scripts.
 3. In `player.gd` `_ready()`: `state_machine.init(self, $States/MovingState)`.
-4. `F5` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â behavior identical to before, but cleanly separated. Commit.
+4. `F5` — behavior identical to before, but cleanly separated. Commit.
 
-## Part 4 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â The Soccer Ball (V04)
+## Part 4 — The Soccer Ball (V04)
 
 Video (conflicting links): https://youtu.be/7HCe3mBnkKE or https://www.youtube.com/watch?v=TKEGLPDgSaI
 
@@ -272,7 +272,7 @@ Video (conflicting links): https://youtu.be/7HCe3mBnkKE or https://www.youtube.c
 2. Add child **Sprite2D** (`ball.png`, uncheck Centered) and **CollisionShape2D** with a `CircleShape2D` matching the sprite.
 3. Enable **Y Sort Enabled** on the root.
 
-### 4.2 Ball physics ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â `ball.gd`
+### 4.2 Ball physics — `ball.gd`
 
 ```gdscript
 @export var friction: float = 0.92  # velocity multiplier per frame
@@ -296,7 +296,7 @@ Add the ball instance to the World scene at center pitch.
 2. Connect `area_entered`: when the ball enters, that player "has the ball".
 3. Track possession globally (variable or signal) so other players release it when someone gains possession. Commit.
 
-## Part 5 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Dribbling (V05)
+## Part 5 — Dribbling (V05)
 
 Video (conflicting links): https://youtu.be/mXBj0fNtQFc or https://www.youtube.com/watch?v=XbS7e6zM-9k
 
@@ -304,12 +304,12 @@ Video (conflicting links): https://youtu.be/mXBj0fNtQFc or https://www.youtube.c
 2. `enter()`: set ball owner to this player; play dribble animation.
 3. `update(delta)`:
    - Position the ball slightly ahead: `player.global_position + player._heading_vector * DRIBBLE_OFFSET`
-   - Shoot pressed ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ `ShootingState`; pass pressed ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ `PassingState`
-   - Tackled (opponent's BallDetectionArea overlaps) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ lose ball, back to `MovingState`
+   - Shoot pressed → `ShootingState`; pass pressed → `PassingState`
+   - Tackled (opponent's BallDetectionArea overlaps) → lose ball, back to `MovingState`
 4. In `MovingState`: when the BallDetectionArea detects the ball, return `DribblingState`.
 5. Ball ownership signal in a global script: `signal ball_owner_changed(new_owner)`. Emit on pickup; other players react (defenders chase, etc.). Commit.
 
-## Part 6 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Shooting (V06)
+## Part 6 — Shooting (V06)
 
 Video (conflicting links): https://youtu.be/q7VX8fOfOwg or https://www.youtube.com/watch?v=Kf9YnIoiMdo
 
@@ -335,7 +335,7 @@ const MAX_CHARGE_TIME = 1.0  # seconds
 2. On `area_entered` by the ball: emit `goal_scored` with the scoring team.
 3. On goal: reset players to starting positions, update the score, trigger kickoff. Commit.
 
-## Part 7 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Passing (V07)
+## Part 7 — Passing (V07)
 
 Video (conflicting links): https://youtu.be/3EL0KzIOj2A or https://www.youtube.com/watch?v=9aClxnuCg4Q
 
@@ -343,16 +343,16 @@ Video (conflicting links): https://youtu.be/3EL0KzIOj2A or https://www.youtube.c
 
 1. Get all teammates (same team group).
 2. Filter: not the passer, same side of pitch, not blocked by opponents.
-3. Score candidates ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â favor teammates ahead of the passer with open space; pick the best.
+3. Score candidates — favor teammates ahead of the passer with open space; pick the best.
 
 ### 7.2 Passing state
 
 1. `passing_state.gd` with `var target: CharacterBody2D`.
 2. `enter()`: compute best target, kick the ball toward them with moderate force, play pass animation.
-3. No valid target ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ fall back to DribblingState.
-4. **Pass request (control swap):** pressing pass *without* the ball switches control to the teammate nearest the ball ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â emit a signal the GameManager handles. Commit.
+3. No valid target → fall back to DribblingState.
+4. **Pass request (control swap):** pressing pass *without* the ball switches control to the teammate nearest the ball — emit a signal the GameManager handles. Commit.
 
-## Part 8 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Precise Trajectories (V08)
+## Part 8 — Precise Trajectories (V08)
 
 Video (conflicting links): https://youtu.be/0YvHpJHiDaA or https://www.youtube.com/watch?v=A2s_HoToGaQ
 
@@ -371,7 +371,7 @@ func predict_position(steps: int) -> Vector2:
 
 AI calls `ball.predict_position(30)` (~0.5 s ahead) and moves to that point. This makes interceptions feel natural. Commit.
 
-## Part 9 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Camera, Goals & Pitch Boundaries (V09)
+## Part 9 — Camera, Goals & Pitch Boundaries (V09)
 
 Video (conflicting links): https://youtu.be/zq5L8Y3MDWA or https://www.youtube.com/watch?v=c1tz1rjCz6o
 
@@ -392,12 +392,12 @@ Video (conflicting links): https://youtu.be/zq5L8Y3MDWA or https://www.youtube.c
    ```
 6. Drag the ball node into the camera's **Ball** export slot in the Inspector.
 7. **Goal scene** (`goal.tscn`): Node2D root with two Sprite2D children `bottom_frame` (texture `goal-bottom`, offset `(-23, -125)`) and `top_frame` (texture `goal-top`, offset `(-23, -59)`). Centered off.
-8. **Goal collision:** Area2D for ball-entry detection (the net doesn't bounce ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â the ball pierces through); StaticBody2D + CollisionPolygon2D for the posts, which do block the ball.
+8. **Goal collision:** Area2D for ball-entry detection (the net doesn't bounce — the ball pierces through); StaticBody2D + CollisionPolygon2D for the posts, which do block the ball.
 9. **Boundary walls:** Sprite2D walls left/right, each with a StaticBody2D sibling + CollisionShape2D. Set collision layers so ball and players hit walls.
-10. **Y-sorting:** tweak sprite offsets (e.g., ÃƒÂ¢Ã‹â€ Ã¢â‚¬â„¢4 px) so walls and goal posts layer correctly; enable Y-sort on parent Node2Ds.
+10. **Y-sorting:** tweak sprite offsets (e.g., −4 px) so walls and goal posts layer correctly; enable Y-sort on parent Node2Ds.
 11. **Mirror walls:** duplicate the left wall, set `scale.x = -1`.
 
-## Part 10 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Headers (V10)
+## Part 10 — Headers (V10)
 
 Video (conflicting links): https://youtu.be/aSFw5CQqQAE or https://www.youtube.com/watch?v=FHnebIUSXHk
 
@@ -415,10 +415,10 @@ The game fakes a third dimension with a `height` value.
 2. **Ball air properties:** `air_connect_min_height` / `air_connect_max_height` exports; `can_air_connect()` and `can_air_interact()` check the ball's height range and that it isn't carried.
 3. **High passes:** `const DISTANCE_HIGH_PASS = 130` in `ball.gd`; in `pass_to()`, if distance > threshold add a vertical arc: `height_velocity = GRAVITY * distance / (1.8 * intensity)`.
 4. **Header state** (`player_state_header.gd`): `BONUS_POWER = 1.3`, `HEIGHT_START = 0.1`, `HEIGHT_VELOCITY = 1.5`. On enter: play `header` animation, set player height/velocity.
-5. **Trigger:** in the moving state, if `ball.can_air_interact()` and shoot just pressed and player is moving ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ HEADER state.
-6. Add the `header` animation; ball redirects with the 1.3ÃƒÆ’Ã¢â‚¬â€ power bonus. Add `HEADER` to the state enum.
+5. **Trigger:** in the moving state, if `ball.can_air_interact()` and shoot just pressed and player is moving → HEADER state.
+6. Add the `header` animation; ball redirects with the 1.3× power bonus. Add `HEADER` to the state enum.
 
-## Part 11 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Volleys, Bicycle Kicks & Chest Control (V11)
+## Part 11 — Volleys, Bicycle Kicks & Chest Control (V11)
 
 Video (conflicting links): https://youtu.be/UaX4MWTU6pI or https://www.youtube.com/watch?v=NDLF-bdXQpA
 
@@ -427,14 +427,14 @@ Video (conflicting links): https://youtu.be/UaX4MWTU6pI or https://www.youtube.c
 3. **Bicycle kick** (`BONUS_POWER = 2.0`): ball high and player facing *away* from goal.
 4. **Chest control** (`DURATION_CONTROL = 500 ms`): trap a high ball and bring it down.
 5. Refactor `can_air_connect(min_height, max_height)` to take parameters.
-6. `Player.control_ball()`: if ball height > `BALL_CONTROL_HEIGHT_MAX` ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ CHEST_CONTROL.
+6. `Player.control_ball()`: if ball height > `BALL_CONTROL_HEIGHT_MAX` → CHEST_CONTROL.
 7. Add `is_facing_target_goal()` helper (chooses volley vs bicycle) and `Goal.get_random_target_position()` for aim. Register the new states in the state factory.
 
-## Part 12 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Team Rosters from JSON (V12)
+## Part 12 — Team Rosters from JSON (V12)
 
 Video (conflicting links): https://youtu.be/rQkPgRpZsUE or https://www.youtube.com/watch?v=ADKs38tE3JY
 
-**This is the heart of the SFPUC customization** ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â see Section B for the full SFPUC roster file.
+**This is the heart of the SFPUC customization** — see Section B for the full SFPUC roster file.
 
 1. Create `assets/json/squads.json`: an array of team objects, each with a `"team"` string and a `"players"` array. Each player: `{"name", "skin" (int), "role" (int), "speed" (int), "power" (int)}`.
 2. Create `resources/player_resource.gd` (extends Resource):
@@ -450,11 +450,11 @@ Video (conflicting links): https://youtu.be/rQkPgRpZsUE or https://www.youtube.c
 5. `player.initialize(resource)`: copies speed, power, role, skin color, and name onto the node.
 6. Add `Player.Role` enum (`DEFENDER=0, MIDFIELDER=1, FORWARD=2`) and `Player.SkinColor` enum.
 
-## Part 13 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Team Colors via Shader (V13)
+## Part 13 — Team Colors via Shader (V13)
 
 Video (conflicting links): https://youtu.be/eJFKLf4IQJM or https://www.youtube.com/watch?v=j3WWkdnGGgk
 
-One spritesheet, any kit color ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â a palette-swap shader recolors players at runtime. **This is where Water blue / Power yellow / Sewer green / Hetch Hetchy powder blue get applied.**
+One spritesheet, any kit color — a palette-swap shader recolors players at runtime. **This is where Water blue / Power yellow / Sewer green / Hetch Hetchy powder blue get applied.**
 
 1. Create `shaders/replace_color.gdshader` (`canvas_item` type):
    ```glsl
@@ -465,7 +465,7 @@ One spritesheet, any kit color ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â a palette-
    uniform int team_color;
    ```
    Logic: match source pixel colors against the palette textures and swap by index.
-2. Create palette PNGs: `skin_palette.png` (rows = skin tones) and `team_palette.png` (rows = team colors ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â one row per SFPUC team).
+2. Create palette PNGs: `skin_palette.png` (rows = skin tones) and `team_palette.png` (rows = team colors — one row per SFPUC team).
 3. Assign a **ShaderMaterial** to `player_sprite` in `player.tscn` with `resource_local_to_scene = true`; assign both palettes as shader params.
 4. In `player.gd`:
    ```gdscript
@@ -476,7 +476,7 @@ One spritesheet, any kit color ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â a palette-
    ```
 5. Call `set_shader_properties()` from `initialize()`.
 
-## Part 14 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Steering Behaviors & AI Movement (V14)
+## Part 14 — Steering Behaviors & AI Movement (V14)
 
 Video: https://youtu.be/4_J_rYPteXg
 
@@ -494,24 +494,24 @@ CPU players chase and intercept using steering forces.
    ```
 2. Player additions: `spawn_position: Vector2`, `weight_on_duty_steering: float`, `ai_behavior: AIBehavior`, and `setup_ai_behavior()`.
 3. In the moving state: if `control_scheme == CPU`, call `ai_behavior.process_ai()`.
-4. In `actors_container.gd`: `const DURATION_WEIGHT_CACHE = 200`; store home/away squads; `set_on_duty_weights()` sorts CPU players by distance to ball and assigns `1 - ease(float(i) / 10.0, 0.1)` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â nearest players chase hardest.
+4. In `actors_container.gd`: `const DURATION_WEIGHT_CACHE = 200`; store home/away squads; `set_on_duty_weights()` sorts CPU players by distance to ball and assigns `1 - ease(float(i) / 10.0, 0.1)` — nearest players chase hardest.
 
-## Part 15 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â AI Decision Making (V15)
+## Part 15 — AI Decision Making (V15)
 
 Video (conflicting links): https://youtu.be/JYkFR7Kw7cE or https://www.youtube.com/watch?v=3i3oWE2pWaE
 
 1. Constants in `ai_behavior.gd`: `SHOT_DISTANCE = 150`, `SHOT_PROBABILITY = 0.3`, `SPREAD_ASSIST_FACTOR = 0.8`.
 2. `get_carrier_steering_force()`: with the ball, steer toward the target goal (uses `get_bicircular_weight()`).
 3. `get_assist_formation_steering()`: teammates without the ball position at `ball_carrier.position + direction * SPREAD_ASSIST_FACTOR` to open passing lanes.
-4. `perform_ai_movement()`: pick force by role ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â carrier force / assist force / chase force.
-5. `perform_ai_decisions()`: with ball + within `SHOT_DISTANCE` of goal + `randf() < SHOT_PROBABILITY` ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ shoot.
+4. `perform_ai_movement()`: pick force by role — carrier force / assist force / chase force.
+5. `perform_ai_decisions()`: with ball + within `SHOT_DISTANCE` of goal + `randf() < SHOT_PROBABILITY` → shoot.
 6. Ball tuning: `friction_air = 35.0`, `friction_ground = 250.0`.
 
-## Part 16 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Tackling & Getting Hurt (V16)
+## Part 16 — Tackling & Getting Hurt (V16)
 
 Video (conflicting links): https://youtu.be/oI_kXJsRaTA or https://www.youtube.com/watch?v=6Vbt0alyxn4
 
-1. Add `HURT` to the state enum. `player_state_hurt.gd`: `DURATION_HURT = 1000 ms`, plays `hurt` animation (frames 54ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“55), upward `height_velocity` knockback.
+1. Add `HURT` to the state enum. `player_state_hurt.gd`: `DURATION_HURT = 1000 ms`, plays `hurt` animation (frames 54–55), upward `height_velocity` knockback.
 2. Ball `tumble()`:
    ```gdscript
    const TUMBLE_HEIGHT_VELOCITY = 3.0
@@ -525,24 +525,24 @@ Video (conflicting links): https://youtu.be/oI_kXJsRaTA or https://www.youtube.c
 4. `on_tackle_player()`: if the tackled player carries the ball for the *other team*, call `ball.tumble()` and send them to HURT.
 5. AI passes under pressure: add `PASS_PROBABILITY`; in `perform_ai_decisions()`, `elif has_opponents_nearby() and randf() < PASS_PROBABILITY: player.switch_state(PASSING)`. `has_opponents_nearby()` checks an opponent-detection Area2D.
 
-## Part 17 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Goalkeeper (V17)
+## Part 17 — Goalkeeper (V17)
 
 Video: https://www.youtube.com/watch?v=-Rh283BywIE
 
 1. New physics layers in `project.godot`: `InvisibleWalls`, `ScoringArea`, `GoalKeeperHands`.
-2. **AIBehaviorFactory** picks the right AI per role; rename `ai_behavior.gd` ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ `ai_behavior_field.gd`, move to `scenes/characters/ai/`.
+2. **AIBehaviorFactory** picks the right AI per role; rename `ai_behavior.gd` → `ai_behavior_field.gd`, move to `scenes/characters/ai/`.
 3. `ai_behavior_goalie.gd`: movement tracks the ball's Y position; decisions trigger a **DIVING** state when the ball enters the scoring area.
 4. `goal.gd` helpers: `get_top_target_position()`, `get_bottom_target_position()`, `get_scoring_area()`.
-5. `player_state_diving.gd`: dive animation, knockback, ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ RECOVERING after 500 ms.
+5. `player_state_diving.gd`: dive animation, knockback, → RECOVERING after 500 ms.
 6. `can_carry_ball()` returns false for the GOALIE role.
 7. Ball gets a `scoring_raycast` (RayCast2D) aimed along `velocity.angle()` each frame to detect shots on goal.
 8. Differentiate VOLLEY_KICK vs BICYCLE_KICK by vertical velocity and air state.
 
-## Part 18 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Pass Requests & Smarter AI (V18)
+## Part 18 — Pass Requests & Smarter AI (V18)
 
 Video: https://www.youtube.com/watch?v=QVF2EtRfUAA
 
-1. `get_pass_request()` on the player ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â request a pass to swap control to a nearby teammate.
+1. `get_pass_request()` on the player — request a pass to swap control to a nearby teammate.
 2. `actors_container.gd`: connect `on_player_swap_request` to handle control swapping.
 3. `BallStateData` with `DURATION_TUMBLE_LOCK` and `DURATION_PASS_LOCK` to prevent premature state flips.
 4. Add a `teammate_detection_area` to each AI player for coordinated positioning.
@@ -550,37 +550,37 @@ Video: https://www.youtube.com/watch?v=QVF2EtRfUAA
 6. AI passes only when `has_opponents_nearby()` **and** `has_teammate_in_view()`.
 7. `MAX_CAPTURE_HEIGHT` prevents capturing a ball that's too high.
 
-## Part 19 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Goal Celebrations & Game Manager (V19)
+## Part 19 — Goal Celebrations & Game Manager (V19)
 
 Video: https://www.youtube.com/watch?v=VyD98bithXI
 
-1. `game_events.gd` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â a global signal bus (autoload) with `team_scored`.
+1. `game_events.gd` — a global signal bus (autoload) with `team_scored`.
 2. **GameManager** autoload with its own state machine: `InPlay, Scored, GameOver, Overtime, Reset`.
 3. `GameStateData` shares score, teams, and time between states; `GameStateFactory` instantiates states.
 4. `goal.initialize(team)` + detection logic emits `GameEvents.team_scored`.
 5. `PlayerStateCelebrating` / `PlayerStateMourning`: on `team_scored`, celebrate if your team scored, mourn otherwise.
 6. `actors_container.gd` passes the two competing teams to `spawn_players()` to associate teams with goals.
 
-## Part 20 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Kickoffs & the Full Match Loop (V20)
+## Part 20 — Kickoffs & the Full Match Loop (V20)
 
 Video: https://www.youtube.com/watch?v=GFcCGij6HUE
 
 1. New signals: `kickoff_ready`, `kickoff_started`, `team_reset`.
 2. `GameStateKickoff`: wait for Pass input, then emit `kickoff_started`.
-3. `game_state_reset.gd`: emit `team_reset`, wait for all players' `kickoff_ready`, then ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ kickoff.
+3. `game_state_reset.gd`: emit `team_reset`, wait for all players' `kickoff_ready`, then → kickoff.
 4. `PlayerStateReseting`: steer each player back to their `reset_position`; emit `kickoff_ready` on arrival. Register in the state factory.
 5. Player gets `kickoff_position`, `reset_position`, and `face_towards_target_goal()`.
-6. Celebrating/mourning states listen for `team_reset` ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ RESETING.
+6. Celebrating/mourning states listen for `team_reset` → RESETING.
 7. Ball: `on_team_reset()` returns to spawn; `on_kickoff_started()` plays a short forward pass.
 8. World scene: add `KickOffs` Node2D spawn points at center field for both teams.
 9. GameManager helpers: `player_setup`, `is_coop()`, `is_single_player()`.
 
-## Part 21 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â HUD & Game UI (V21)
+## Part 21 — HUD & Game UI (V21)
 
 Video: https://www.youtube.com/watch?v=8s28FYYr6Ek
 
 1. `game_theme.tres`: Label font = `Pixeled.ttf`, size 5, white.
-2. `scenes/ui/ui.tscn`: score labels (home/away), match clock, and **badge TextureRects** for both teams (the original uses country flags ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â SFPUC uses division badges).
+2. `scenes/ui/ui.tscn`: score labels (home/away), match clock, and **badge TextureRects** for both teams (the original uses country flags — SFPUC uses division badges).
 3. `ui.gd`: listen for `score_changed` and `game_over`; update labels; show the game-over overlay.
 4. Helpers: `score_helper.gd` (score string), `time_helper.gd` (MM:SS), `flag_helper.gd` (badge texture by team key).
 5. New signals: `ball_possessed`, `ball_released`, `game_over`, `score_changed`.
@@ -588,7 +588,7 @@ Video: https://www.youtube.com/watch?v=8s28FYYr6Ek
 7. `reset_control_schemes()` reassigns player/CPU roles after game over.
 8. Win/loss celebrations at full time, not just per-goal. Add the UI scene to `world.tscn`.
 
-## Part 22 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Juice & Polish (V22)
+## Part 22 — Juice & Polish (V22)
 
 Video (conflicting links): https://youtu.be/0VcMOEIlFpk or https://www.youtube.com/watch?v=hLaYwyI5UiQ
 
@@ -598,40 +598,40 @@ Video (conflicting links): https://youtu.be/0VcMOEIlFpk or https://www.youtube.c
 4. **Run particles** on players when speed exceeds a threshold.
 5. **Anti-swarming AI**: `get_density_around_ball_steering_force()` pushes players away when too many teammates crowd the ball (`get_proximity_teammates_count()`).
 6. **Stat rebalance** in `squads.json`: cap most speeds at 75, rebalance power.
-7. Random 0ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“0.5 s delay before celebration animations so the team doesn't move in lockstep.
+7. Random 0–0.5 s delay before celebration animations so the team doesn't move in lockstep.
 
-## Part 23 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Menus & Sound Effects (V23)
+## Part 23 — Menus & Sound Effects (V23)
 
 Video (conflicting links): https://youtu.be/Yp1M7kRVyAg or https://www.youtube.com/watch?v=NhB7nXOzu-Q
 
-1. **SoundPlayer** singleton (`scenes/audio/sound_player.gd`, autoload): `play_bounce()`, `play_hurt()`, `play_pass()`, `play_shot()`, `play_whistle()` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â each plays its `.wav`.
+1. **SoundPlayer** singleton (`scenes/audio/sound_player.gd`, autoload): `play_bounce()`, `play_hurt()`, `play_pass()`, `play_shot()`, `play_whistle()` — each plays its `.wav`.
 2. Hook sounds into: wall bounces, bicycle kick, header, hurt, passing, shooting, volley states; whistle on goals.
-3. **Main menu** (`scenes/screens/main_menu/`): Start and Quit buttons; Start ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ team selection.
-4. **Team selection screen** (`scenes/screens/team_selection/`): two `FlagSelector` nodes (home/away) cycling through teams loaded via `DataLoader.get_teams()` ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â for SFPUC these show the four division badges.
+3. **Main menu** (`scenes/screens/main_menu/`): Start and Quit buttons; Start → team selection.
+4. **Team selection screen** (`scenes/screens/team_selection/`): two `FlagSelector` nodes (home/away) cycling through teams loaded via `DataLoader.get_teams()` — for SFPUC these show the four division badges.
 5. Remove any hardcoded team list from `player.gd`; load dynamically from JSON.
 6. Kickoff state uses `GameManager.player_setup` to assign player/CPU control per selected mode.
 7. Fix: adjust the goal scoring-area position so edge shots register.
 
-## Part 24 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Final Integration (V24)
+## Part 24 — Final Integration (V24)
 
-Video: https://www.youtube.com/watch?v=dTtX-AKj8YQ ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Checkpoint: https://github.com/nicolasbize/soccer-course/releases/tag/v0.2.4
+Video: https://www.youtube.com/watch?v=dTtX-AKj8YQ • Checkpoint: https://github.com/nicolasbize/soccer-course/releases/tag/v0.2.4
 
-1. Wire the flow: main menu ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ team selection ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ (store selections in GameManager) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ `world.tscn`.
+1. Wire the flow: main menu → team selection → (store selections in GameManager) → `world.tscn`.
 2. **Background music**: AudioStreamPlayer with a looping `.ogg`; add `play_music()` / `stop_music()` to SoundPlayer.
 3. Fix the scoring-area collision size/position so edge shots always count.
 4. Fix remaining AI edge cases (stuck goalkeeper, ball capture at spawn).
-5. **Full loop test**: menu ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ team select ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ kickoff ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ play ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ score ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ celebrate ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ reset ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ kickoff ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ game over ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ back to menu.
+5. **Full loop test**: menu → team select → kickoff → play → score → celebrate → reset → kickoff → game over → back to menu.
 6. **Export for Web (HTML5)**: Project > Export > Add > Web, set the export template and output path. This produces a static bundle (`index.html` + `.wasm` + `.pck`).
 
 ### Web hosting note (preferred: GitHub Pages)
 
-Godot 4 web builds normally require two HTTP headers (`Cross-Origin-Opener-Policy: same-origin`, `Cross-Origin-Embedder-Policy: require-corp`) because the engine uses SharedArrayBuffer for threading ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â and GitHub Pages does not send custom headers.
+Godot 4 web builds normally require two HTTP headers (`Cross-Origin-Opener-Policy: same-origin`, `Cross-Origin-Embedder-Policy: require-corp`) because the engine uses SharedArrayBuffer for threading — and GitHub Pages does not send custom headers.
 
-**Thing to try first:** in the Web export settings (Godot 4.3+), turn **Thread Support OFF**. The build runs single-threaded, no longer needs SharedArrayBuffer or the headers, and can be hosted straight on GitHub Pages: commit the exported files to the repo (e.g. a `docs/` folder or `gh-pages` branch), enable Pages in the repo settings, done. For a small 2D game the performance cost should be negligible ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â watch for audio crackle as the main symptom.
+**Thing to try first:** in the Web export settings (Godot 4.3+), turn **Thread Support OFF**. The build runs single-threaded, no longer needs SharedArrayBuffer or the headers, and can be hosted straight on GitHub Pages: commit the exported files to the repo (e.g. a `docs/` folder or `gh-pages` branch), enable Pages in the repo settings, done. For a small 2D game the performance cost should be negligible — watch for audio crackle as the main symptom.
 
-If threads turn out to be needed, fall back to itch.io (handles the headers automatically) or an internal server where IT can add them. Also remap Player 2's shoot key away from Tab before exporting ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Tab moves focus in browsers.
+If threads turn out to be needed, fall back to itch.io (handles the headers automatically) or an internal server where IT can add them. Also remap Player 2's shoot key away from Tab before exporting — Tab moves focus in browsers.
 
-> The original series also covers a tournament bracket and team-selection screens in the videos listed as V20ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“V22 in the transcript's reference table (Tournament Screen, Team Selection, Main Menu). The transcript's detailed sections fold these into Parts 19ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“24 above. If you want the full bracket implementation, check out the corresponding repo tags and read the `scenes/screens/` folder.
+> The original series also covers a tournament bracket and team-selection screens in the videos listed as V20–V22 in the transcript's reference table (Tournament Screen, Team Selection, Main Menu). The transcript's detailed sections fold these into Parts 19–24 above. If you want the full bracket implementation, check out the corresponding repo tags and read the `scenes/screens/` folder.
 
 ---
 
@@ -639,7 +639,7 @@ If threads turn out to be needed, fall back to itch.io (handles the headers auto
 
 Do the base build first (or clone the finished `v0.2.4` tag), then apply these changes. They're ordered from simplest to most involved.
 
-## B.1 Replace the rosters ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â `assets/json/squads.json`
+## B.1 Replace the rosters — `assets/json/squads.json`
 
 Replace the country squads with SFPUC teams. Keep the same schema the DataLoader expects (rename the `"country"` key only if you also rename it in `data_loader.gd`; otherwise keep the key and just change its values):
 
@@ -666,9 +666,9 @@ Notes:
 
 - Use real employee names (with permission!) or fun division-themed names as above.
 - `role`: 0 = defender, 1 = midfielder, 2 = forward, 3 = goalie (match whatever enum order you defined in Part 12/17).
-- Keep speeds ÃƒÂ¢Ã¢â‚¬Â°Ã‚Â¤ 75 per the Part 22 balance pass. Give each team a slightly different flavor ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â e.g., Power hits harder (power), Water runs faster (speed), Sewer defends deep.
+- Keep speeds ≤ 75 per the Part 22 balance pass. Give each team a slightly different flavor — e.g., Power hits harder (power), Water runs faster (speed), Sewer defends deep.
 
-## B.2 Team colors ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â `team_palette.png` (Part 13 shader)
+## B.2 Team colors — `team_palette.png` (Part 13 shader)
 
 The team palette texture has one row per team. Rebuild it with four rows in the same order as the teams in `squads.json`:
 
@@ -681,30 +681,31 @@ The team palette texture has one row per team. Rebuild it with four rows in the 
 
 Since Water and Hetch Hetchy are both blue, keep Water's kit dark and Hetch Hetchy's clearly pale so they read differently at game resolution.
 
-Each row typically holds 2ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“4 shades (main kit, shadow, trim) ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â copy the shade-step pattern from the original palette rows so shading still reads correctly. No shader code changes needed; the `team_color` index just selects a row.
+Each row typically holds 2–4 shades (main kit, shadow, trim) — copy the shade-step pattern from the original palette rows so shading still reads correctly. No shader code changes needed; the `team_color` index just selects a row.
 
 ## B.3 Official-logo flags
 
 The UI (Part 21) and team selection screen (Part 23) display a texture per team via `flag_helper.gd`.
 
 1. Add the approved official logo source to `assets/art/brand/` and preserve it unchanged.
-2. Create four flag PNGs at the same pixel dimensions as the original flag assets (22ÃƒÆ’Ã¢â‚¬â€14 px): `flag_water.png`, `flag_power.png`, `flag_sewer.png`, and `flag_hhwp.png`.
+2. Create four flag PNGs at the same pixel dimensions as the original flag assets (22×14 px): `flag_water.png`, `flag_power.png`, `flag_sewer.png`, and `flag_hhwp.png`.
 3. Each flag uses the same official logo, centered on a solid team-color field. Do not generate substitute team marks or recolor the official logo.
-4. Update `flag_helper.gd` to map team keys ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ the four logo flag textures.
+4. Update `flag_helper.gd` to map team keys → the four logo flag textures.
 
 At this small size, prepare the flags from a larger source card, crop each variant, then downscale with nearest-neighbor filtering. Use the original player sprite sheet and palette shader for kit variants; add the logo to a jersey only if it remains legible at game resolution.
 
 ## B.4 Rename the game
 
-- **Project name:** Project Settings > Application > Config > Name ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ "SFPUC Super Soccer".
+- **Project name:** Project Settings > Application > Config > Name → "SFPUC Super Soccer".
 - **Main menu title** (Part 23's `main_menu_screen.tscn`): change the title label/texture.
-- **Window icon:** replace icon.svg.\r\n- **Typography:** use Franklin Gothic Book for UI labels and Minion Pro Regular for formal/tournament copy when licensing and file formats permit.
+- **Window icon:** replace icon.svg.
+- **Typography:** use Franklin Gothic Book for UI labels and Minion Pro Regular for formal/tournament copy when licensing and file formats permit.
 
 ## B.5 Tournament mode with 4 teams
 
-Good news: 4 teams is a *cleaner* bracket than the original (which pads to quarterfinals). Your solo tournament becomes: **two semifinals ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ final**.
+Good news: 4 teams is a *cleaner* bracket than the original (which pads to quarterfinals). Your solo tournament becomes: **two semifinals → final**.
 
-1. In the tournament screen logic, seed the four teams into two semifinal matches (randomize or fix the matchups ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Water vs Sewer and Power vs Hetch Hetchy Water and Power is thematically fun: "the pipes derby" and "the powerhouse derby").
+1. In the tournament screen logic, seed the four teams into two semifinal matches (randomize or fix the matchups — Water vs Sewer and Power vs Hetch Hetchy Water and Power is thematically fun: "the pipes derby" and "the powerhouse derby").
 2. Winner of each semi meets in the final.
 3. If the tournament code assumes 8 teams, reduce the bracket array to 4 entries and remove the quarterfinal round; check the repo's tournament screen code (in `scenes/screens/`) at the corresponding tag.
 
@@ -746,7 +747,7 @@ Links reproduced from the original transcript. Where the transcript gave two dif
 | V22 | Main Menu | https://youtu.be/aaOqZ7bBCuU |
 | V23 | Juice & Polish | https://youtu.be/0VcMOEIlFpk |
 | V24 | Sound Effects & Music | https://youtu.be/Yp1M7kRVyAg |
-| V25 | Game Trailer | *(placeholder in transcript ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â no valid link)* |
+| V25 | Game Trailer | *(placeholder in transcript — no valid link)* |
 
 **Note:** this table's topic order does not match the transcript's detailed sections after Part 9 (the table and body drifted by one or more videos). The Parts in this guide follow the *detailed body* of the transcript, which is internally consistent and matches the repo structure. When in doubt, trust the repo tags.
 
@@ -754,11 +755,11 @@ Links reproduced from the original transcript. Where the transcript gave two dif
 
 # Attribution & Resources {#attribution--resources}
 
-Based on the 25-video series *"Create a Soccer Game in Godot!"* by **Nicolas Bize** (gadgaming). The source code is MIT-licensed, so SFPUC may freely modify and reuse it ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â retain attribution.
+Based on the 25-video series *"Create a Soccer Game in Godot!"* by **Nicolas Bize** (gadgaming). The source code is MIT-licensed, so SFPUC may freely modify and reuse it — retain attribution.
 
 | Resource | Link |
 |---|---|
 | Course source code (MIT) | https://github.com/nicolasbize/soccer-course |
-| Per-video checkpoints | https://github.com/nicolasbize/soccer-course/tags (23 tags ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â jump to any stage) |
+| Per-video checkpoints | https://github.com/nicolasbize/soccer-course/tags (23 tags — jump to any stage) |
 | Final checkpoint | https://github.com/nicolasbize/soccer-course/releases/tag/v0.2.4 |
 | Play the finished demo | https://gadgaming.itch.io/super-soccer |
