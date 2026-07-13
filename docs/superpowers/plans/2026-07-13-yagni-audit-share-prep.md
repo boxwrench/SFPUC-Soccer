@@ -417,7 +417,7 @@ If the Settings section was empty ("none found"), skip this task entirely and no
 **Interfaces:**
 - Produces: a clean-UTF-8 guide that Task 8 edits further.
 
-- [ ] **Step 1: Install ftfy and write the repair script**
+- [x] **Step 1: Install ftfy and write the repair script**
 
 ```bash
 pip install ftfy
@@ -444,7 +444,7 @@ SRC.write_text(text, encoding="utf-8", newline="\n")
 print(f"fixed in {rounds} round(s); residual 'Ã' count: {text.count('Ã')}")
 ```
 
-- [ ] **Step 2: Run it and verify**
+- [x] **Step 2: Run it and verify**
 
 ```bash
 python "C:\Users\wests\AppData\Local\Temp\claude\C--Github-soccer-course\5dd272b7-4161-4fc5-8e8b-a42bb8e6589e\scratchpad\fix_mojibake.py"
@@ -453,7 +453,7 @@ grep -c "Ã" C:/Github/soccer-course/SFPUC-Soccer-Game-Guide.md
 
 Expected: residual count **0**. Spot-check known lines: line 5 should read "**the checkpoint tags are your safety net.**" preceded by an em-dash, and the Part 2.2 table should show `]` → `p1_pass` with a real arrow. If ftfy leaves residue, examine the specific lines — do NOT hand-retype the whole file.
 
-- [ ] **Step 3: Fix the literal escape on the B.4 line**
+- [x] **Step 3: Fix the literal escape on the B.4 line**
 
 The guide contains a literal `\r\n` in text (B.4, "**Window icon:** replace icon.svg.\r\n- **Typography:**"). Split it into two real list lines:
 
@@ -462,7 +462,7 @@ The guide contains a literal `\r\n` in text (B.4, "**Window icon:** replace icon
 - **Typography:** use Franklin Gothic Book for UI labels and Minion Pro Regular for formal/tournament copy when licensing and file formats permit.
 ```
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add SFPUC-Soccer-Game-Guide.md
