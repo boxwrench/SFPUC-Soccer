@@ -296,7 +296,7 @@ Show the user the three kill-list sections and the "kept" section. Do not begin 
 **Interfaces:**
 - Consumes: approved Assets kill list from Task 2.
 
-- [ ] **Step 1: Delete the approved assets (sidecars included)**
+- [x] **Step 1: Delete the approved assets (sidecars included)**
 
 For each `res://<path>` in the approved Assets section:
 
@@ -307,7 +307,7 @@ git rm -- "<path>" "<path>.import"
 
 (If a listed file has no `.import` — e.g. `.wav` files do, `.json` files don't — `git rm` just the file.)
 
-- [ ] **Step 2: Run the smoke check**
+- [x] **Step 2: Run the smoke check**
 
 ```bash
 godot --headless --path C:/Github/soccer-course --quit-after 120 2>&1 | grep -iE "SCRIPT ERROR|ERROR|Failed|cannot"
@@ -315,7 +315,7 @@ godot --headless --path C:/Github/soccer-course --quit-after 120 2>&1 | grep -iE
 
 Expected: no lines printed. Any missing-resource error names the file to restore: `git restore --staged --worktree -- <path> <path>.import`, move it to the report's "Kept" section, and re-run the check.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add -A
@@ -328,7 +328,7 @@ Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 
 ---
 
-### Task 4: Prune commit 2 — dead code (user playtest checkpoint)
+### Task 4: Prune commit 2 — dead code (user playtest checkpoint) — SKIPPED: audit found 0 dead code items; playtest folded into Task 9 full loop
 
 **Files:**
 - Delete: every file in the approved **Code** section of the audit report (plus `.uid` sidecars)
@@ -373,7 +373,7 @@ Ask the user to run the game (double-click `Launch SFPUC Soccer.vbs` or F5 in th
 
 ---
 
-### Task 5: Prune commit 3 — settings & config
+### Task 5: Prune commit 3 — settings & config — SKIPPED per plan clause: audit Settings section = none found
 
 **Files:**
 - Modify: `project.godot` (only lines named in the approved **Settings** section)
