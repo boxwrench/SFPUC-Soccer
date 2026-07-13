@@ -282,7 +282,7 @@ git commit -m "add dead-code audit report (kill list pending approval)
 Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 ```
 
-- [ ] **Step 7: HARD STOP — present the kill list to the user**
+- [ ] **Step 7: HARD STOP — present the kill list to the user** ← IN PROGRESS: presented 2026-07-13, awaiting user approval (13 assets; user may strike items 8,9,11)
 
 Show the user the three kill-list sections and the "kept" section. Do not begin Task 3 until they approve (they may strike items). Record any strikes by editing the report (move to "Kept") and amending or re-committing.
 
