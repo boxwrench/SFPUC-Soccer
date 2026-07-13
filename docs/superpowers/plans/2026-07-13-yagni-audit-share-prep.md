@@ -482,7 +482,7 @@ Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 - Consumes: nothing from other tasks (safe to reorder).
 - Produces: the repo front door that links to `SFPUC-Soccer-Game-Guide.md`.
 
-- [ ] **Step 1: Replace README.md with this content**
+- [x] **Step 1: Replace README.md with this content**
 
 ```markdown
 # SFPUC Super Soccer
@@ -546,7 +546,7 @@ Game architecture, base art, and course by
 SFPUC customization by boxwrench. See [LICENSE](LICENSE).
 ```
 
-- [ ] **Step 2: Verify the intra-repo links resolve**
+- [x] **Step 2: Verify the intra-repo links resolve**
 
 ```bash
 ls C:/Github/soccer-course/SFPUC-Soccer-Game-Guide.md C:/Github/soccer-course/LICENSE C:/Github/soccer-course/assets/json/squads.json
@@ -554,7 +554,7 @@ ls C:/Github/soccer-course/SFPUC-Soccer-Game-Guide.md C:/Github/soccer-course/LI
 
 Expected: all three paths exist. Also confirm the controls table against `project.godot`'s input map (p2_pass is physical keycode 96 = backtick, p2_shoot is 49 = the `1` key) — if Task 5 changed input actions, reflect that here.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add README.md
