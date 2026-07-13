@@ -28,8 +28,8 @@ by Nicolas Bize.
 | Action | Player 1 | Player 2 |
 |---|---|---|
 | Move | Arrow keys | WASD |
-| Pass | `]` | `` ` `` |
-| Shoot | `[` | `1` |
+| Pass | `[` | `` ` `` |
+| Shoot | `]` | `1` |
 
 Hold Shoot to charge a harder shot. Press Pass without the ball to switch
 to the teammate nearest the ball.
@@ -50,7 +50,8 @@ Quick version:
   (one row per team; a shader recolors the shared spritesheet at runtime)
 - **Team cards/flags:** replace the PNGs mapped in `utils/flag_helper.gd`
 - **Name & title art:** Project Settings → Application → Config → Name,
-  plus the title texture in `scenes/screens/main_menu/`
+  plus the title texture (`assets/art/ui/mainmenu/title-sfpuc-hd-menu.png`,
+  referenced in `scenes/soccer_game.tscn`)
 
 ## Attribution
 
