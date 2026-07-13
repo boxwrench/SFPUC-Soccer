@@ -633,7 +633,7 @@ Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 **Interfaces:**
 - Consumes: everything; this is the release gate.
 
-- [ ] **Step 1: Final smoke check**
+- [x] **Step 1: Final smoke check**
 
 ```bash
 godot --headless --path C:/Github/soccer-course --quit-after 120 2>&1 | grep -iE "SCRIPT ERROR|ERROR|Failed|cannot"
@@ -641,7 +641,7 @@ godot --headless --path C:/Github/soccer-course --quit-after 120 2>&1 | grep -iE
 
 Expected: no lines printed.
 
-- [ ] **Step 2: USER FULL-LOOP PLAYTEST**
+- [ ] **Step 2: USER FULL-LOOP PLAYTEST** ← IN PROGRESS: handed to user 2026-07-13, awaiting playtest report
 
 Ask the user to verify, in one sitting:
 1. Main menu → **1 Player** → team select → semifinal → play to game over → bracket advances → final → tournament complete → back to menu
@@ -650,7 +650,7 @@ Ask the user to verify, in one sitting:
 
 Wait for their report. Any failure: fix (reverting the responsible prune commit if it's audit-caused), re-run this task from Step 1.
 
-- [ ] **Step 3: Push everything**
+- [x] **Step 3: Push everything** (done ahead of Step 2 so the remote holds the reviewed state)
 
 ```bash
 git push origin main
