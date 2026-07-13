@@ -64,6 +64,16 @@ things the videos build are intentionally absent here:
   menu with the course's title texture; this repo replaces it with the
   SFPUC title art described above (`title-sfpuc-hd-menu.png`), so
   `title.png` and `title2.png` aren't present here.
+- **`Player.Role` enum order** — this repo's shipped `player.gd` leads with
+  the goalie (`GOALIE=0, DEFENSE=1, MIDFIELD=2, OFFENSE=3`), not the
+  `DEFENDER/MIDFIELDER/FORWARD` order the course videos build. `squads.json`'s
+  `role` values follow this shipped order.
+- **Player 2's shoot key** — moved off Tab to `1` (physical keycode) in this
+  repo's Input Map, since Tab is unusable as a shoot key in browser exports.
+- **Display settings** — this repo's `project.godot` ships with
+  `viewport_width`/`viewport_height` = `1400`/`900` and Stretch Mode
+  `canvas_items`, rather than Part 1.4's `280`×`180` viewport with a
+  `1400`×`900` override and Stretch Mode `viewport`.
 
 If you're following the videos and your build has something this repo
 lacks, that's expected — the course repo's checkpoint tags
@@ -167,7 +177,7 @@ Video: https://youtu.be/fW3VAX5n9ks
 |---|---|---|
 | left / right / up / down | Arrow keys (`p1_left`, etc.) | WASD (`p2_left`, etc.) |
 | pass | `[` → `p1_pass` | `~` → `p2_pass` |
-| shoot | `]` → `p1_shoot` | Tab → `p2_shoot` |
+| shoot | `]` → `p1_shoot` | `1` → `p2_shoot` |
 
 Tip: keep pass/shoot keys far from the directional keys to avoid mid-game finger conflicts.
 
@@ -468,7 +478,7 @@ Video (conflicting links): https://youtu.be/rQkPgRpZsUE or https://www.youtube.c
 3. Create `utils/data_loader.gd`: read the JSON with `FileAccess`, parse it, map entries to `PlayerResource` objects.
 4. In `actors_container.gd`: `get_squad(team) -> Array[PlayerResource]` and `spawn_player()` that instantiates the player prefab and calls `player.initialize(resource)`.
 5. `player.initialize(resource)`: copies speed, power, role, skin color, and name onto the node.
-6. Add `Player.Role` enum (`DEFENDER=0, MIDFIELDER=1, FORWARD=2`) and `Player.SkinColor` enum.
+6. Add `Player.Role` enum (`GOALIE=0, DEFENSE=1, MIDFIELD=2, OFFENSE=3`) and `Player.SkinColor` enum.
 
 ## Part 13 — Team Colors via Shader (V13)
 
@@ -649,7 +659,7 @@ Godot 4 web builds normally require two HTTP headers (`Cross-Origin-Opener-Polic
 
 **Thing to try first:** in the Web export settings (Godot 4.3+), turn **Thread Support OFF**. The build runs single-threaded, no longer needs SharedArrayBuffer or the headers, and can be hosted straight on GitHub Pages: commit the exported files to the repo (e.g. a `docs/` folder or `gh-pages` branch), enable Pages in the repo settings, done. For a small 2D game the performance cost should be negligible — watch for audio crackle as the main symptom.
 
-If threads turn out to be needed, fall back to itch.io (handles the headers automatically) or an internal server where IT can add them. Also remap Player 2's shoot key away from Tab before exporting — Tab moves focus in browsers.
+If threads turn out to be needed, fall back to itch.io (handles the headers automatically) or an internal server where IT can add them. This repo already maps Player 2's shoot key to `1` rather than Tab, so no remap is needed before exporting — Tab moves focus in browsers and would otherwise be unusable there.
 
 > The original series also covers a tournament bracket and team-selection screens in the videos listed as V20–V22 in the transcript's reference table (Tournament Screen, Team Selection, Main Menu). The transcript's detailed sections fold these into Parts 19–24 above. If you want the full bracket implementation, check out the corresponding repo tags and read the `scenes/screens/` folder.
 
@@ -685,7 +695,7 @@ Replace the country squads with SFPUC teams. Keep the same schema the DataLoader
 Notes:
 
 - Use real employee names (with permission!) or fun division-themed names as above.
-- `role`: 0 = defender, 1 = midfielder, 2 = forward, 3 = goalie (match whatever enum order you defined in Part 12/17).
+- `role`: 0 = goalie, 1 = defense, 2 = midfield, 3 = offense (match whatever enum order you defined in Part 12/17).
 - Keep speeds ≤ 75 per the Part 22 balance pass. Give each team a slightly different flavor — e.g., Power hits harder (power), Water runs faster (speed), Sewer defends deep.
 
 ## B.2 Team colors — `team_palette.png` (Part 13 shader)
@@ -707,7 +717,7 @@ Each row typically holds 2–4 shades (main kit, shadow, trim) — copy the shad
 
 The UI (Part 21) and team selection screen (Part 23) display a texture per team via `flag_helper.gd`.
 
-1. Add the approved official logo source to `assets/art/brand/` and preserve it unchanged.
+1. Add the approved official logo source to `assets/art/brand/` and preserve it unchanged. (This repo does not include that high-res brand source — only the final in-game team cards/flags are checked in.)
 2. Create four flag PNGs at the same pixel dimensions as the original flag assets (22×14 px): `flag_water.png`, `flag_power.png`, `flag_sewer.png`, and `flag_hhwp.png`.
 3. Each flag uses the same official logo, centered on a solid team-color field. Do not generate substitute team marks or recolor the official logo.
 4. Update `flag_helper.gd` to map team keys → the four logo flag textures.
