@@ -21,12 +21,15 @@ regex) the same as a resolved `uid://`. After the fix: 304 files, 275
 reachable, 29 orphan candidates (down from 258), and both sanity checks
 (FlagHelper's 8 flag paths + `scenes/soccer_game.tscn`) pass.
 
+Caveat: the per-candidate basename-grep sweep covered code/scene/config files
+(`*.gd`, `*.tscn`, `*.tres`, project.godot) but not root-level `.md` docs, so
+intentional-keep statements in documentation (SFPUC-Soccer-Game-Guide.md) were
+initially missed; the two affected items are in "Kept despite looking dead".
+
 ## Assets (prune commit 1)
 - res://assets/art/brand/SFWPS-Horz-4C-white.png — unreachable in reference walk; no dynamic-load hits; zero grep hits for basename in scenes/utils/resources/project.godot (.import sidecar implied)
 - res://assets/art/brand/sfpuc-soccer.ico — unreachable; project.godot `config/icon` points to `res://icon.svg`, not this file; no export_presets.cfg exists in the repo to reference it either; zero basename hits
-- res://assets/art/characters/soccer-fplayer2.png — unreachable; `scenes/characters/player.tscn` loads `res://assets/art/characters/soccer-player.png` instead; zero basename hits (.import sidecar implied)
 - res://assets/art/ui/1x1.png — unreachable; no dynamic-load hits; zero basename hits (.import sidecar implied)
-- res://assets/art/ui/mainmenu/menu-backgroundSF.png — unreachable; `scenes/screens/main_menu/main_menu_screen.tscn` uses `menu-backgroundSF-fitted.png` instead (superseded asset); zero basename hits (.import sidecar implied)
 - res://assets/art/ui/mainmenu/options-selected.png — unreachable; zero basename hits (.import sidecar implied)
 - res://assets/art/ui/mainmenu/options.png — unreachable; zero basename hits (.import sidecar implied)
 - res://assets/art/ui/mainmenu/title-sfpuc-hd-transparent.png — unreachable; zero basename hits (.import sidecar implied)
@@ -51,4 +54,6 @@ None found.
 - Autoloads: all 5 (`DataLoader`: 5 files, `GameEvents`: 19 files, `GameManager`: 15 files, `SoundPlayer`: 14 files, `MusicPlayer`: 2 files) are referenced from code — none are dead.
 
 ## Kept despite looking dead (do NOT delete)
+- res://assets/art/characters/soccer-fplayer2.png (and its .import sidecar) — engine-unreachable, but SFPUC-Soccer-Game-Guide.md "Current Repository State" documents it as intentionally-kept editable raw artwork ("The matching editable raw artwork is kept as `menu-backgroundSF.png` and `soccer-fplayer2.png`.")
+- res://assets/art/ui/mainmenu/menu-backgroundSF.png (and its .import sidecar) — engine-unreachable (main menu uses `menu-backgroundSF-fitted.png`), but SFPUC-Soccer-Game-Guide.md "Current Repository State" documents it as intentionally-kept editable raw artwork
 - res://default_bus_layout.tres — flagged as an orphan by the reference walk because it has no `res://` or `uid://` mention anywhere in project.godot, but this is Godot's implicit default value for the `audio/buses/default_bus_layout` project setting: Godot only writes that key into project.godot when it differs from the default, so the engine loads this file automatically from its well-known path at startup. Confirmed project.godot has no `[audio]` section and no `audio/buses/default_bus_layout` override key. Not a kill-list candidate.
