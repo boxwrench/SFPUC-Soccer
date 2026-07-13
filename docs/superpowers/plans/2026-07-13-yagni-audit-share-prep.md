@@ -573,11 +573,11 @@ Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
 **Interfaces:**
 - Consumes: the final audit report (what was actually pruned in Tasks 3–5).
 
-- [ ] **Step 1: Update "Current Repository State"**
+- [x] **Step 1: Update "Current Repository State"**
 
 Rewrite that section (currently lines 38–51) so every claim matches the post-prune repo. Verify each bullet by checking the file it names still exists (e.g. `assets/art/ui/mainmenu/menu-backgroundSF-fitted.png`, `title-sfpuc-hd-menu.png`, the female spritesheet). Drop bullets about assets that were pruned; add a sentence noting the repo was dead-code audited on 2026-07-13 with a link to `docs/superpowers/audits/2026-07-13-dead-code-audit.md`.
 
-- [ ] **Step 2: Add divergence notes**
+- [x] **Step 2: Add divergence notes**
 
 Insert a subsection immediately after "Current Repository State":
 
@@ -602,7 +602,7 @@ for the un-pruned version.
 
 Replace the italic placeholder bullet with the real bullets before committing — the final list depends on what the user approved in Task 2.
 
-- [ ] **Step 3: Verify no stale references remain**
+- [x] **Step 3: Verify no stale references remain**
 
 For every file pruned in Tasks 3–5, grep the guide for its basename:
 
@@ -614,7 +614,7 @@ done
 
 Expected: no `STALE:` lines, except where the guide *deliberately* mentions a removed file in the divergence notes.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add SFPUC-Soccer-Game-Guide.md
