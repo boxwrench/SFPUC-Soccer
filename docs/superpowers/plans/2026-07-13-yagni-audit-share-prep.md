@@ -105,7 +105,7 @@ Expected: success. If rejected (repo not empty, auth failure, repo doesn't exist
 **Interfaces:**
 - Produces: the approved kill list that Tasks 3–5 execute. Report format: one section per prune commit (`## Assets`, `## Code`, `## Settings`), each item as `- path — evidence`.
 
-- [ ] **Step 1: Write the reference-graph script**
+- [x] **Step 1: Write the reference-graph script**
 
 Save as `audit_refs.py` in the scratchpad directory:
 
@@ -197,7 +197,7 @@ if __name__ == "__main__":
     main()
 ```
 
-- [ ] **Step 2: Run it and sanity-check the output**
+- [x] **Step 2: Run it and sanity-check the output**
 
 ```bash
 python "C:\Users\wests\AppData\Local\Temp\claude\C--Github-soccer-course\5dd272b7-4161-4fc5-8e8b-a42bb8e6589e\scratchpad\audit_refs.py"
@@ -208,7 +208,7 @@ Expected: a count line plus orphan candidates. Sanity checks before trusting it:
 - `scenes/soccer_game.tscn` must be reachable (it's the main scene, referenced by uid from project.godot).
 - If either check fails, the script has a bug — fix it before reading any further output.
 
-- [ ] **Step 3: Hunt dynamic-path false positives**
+- [x] **Step 3: Hunt dynamic-path false positives**
 
 Any orphan candidate could still be loaded via a string built at runtime. Check for construction patterns:
 
@@ -218,7 +218,7 @@ grep -rn "res://.*%s\|res://.*\" *+\|str(\"res://" C:/Github/soccer-course/scene
 
 Expected: few or no hits (FlagHelper uses literal dicts). Every hit must be resolved by hand against the candidate list; anything plausibly loaded dynamically gets **removed from the kill list** with a note.
 
-- [ ] **Step 4: Audit the config surface (settings, input, physics layers)**
+- [x] **Step 4: Audit the config surface (settings, input, physics layers)**
 
 Each check produces evidence lines for the report:
 
@@ -244,7 +244,7 @@ done
 
 An input action with 0 file hits, a physics layer whose bit appears in no scene, or a `quarter*` code path is a **Settings/Code kill-list candidate** — each with its zero-hit grep as evidence.
 
-- [ ] **Step 5: Write the audit report**
+- [x] **Step 5: Write the audit report**
 
 Create `docs/superpowers/audits/2026-07-13-dead-code-audit.md` with exactly three kill-list sections mapping to the three prune commits, plus a "Kept despite looking dead" section for dynamic-load survivors:
 
@@ -273,7 +273,7 @@ user approval.
 
 Fill every section from Steps 2–4 output. Empty sections say "none found".
 
-- [ ] **Step 6: Commit the report**
+- [x] **Step 6: Commit the report**
 
 ```bash
 git add docs/superpowers/audits/2026-07-13-dead-code-audit.md
