@@ -48,7 +48,27 @@ The active runtime assets and behavior are:
 - Main-menu title: `assets/art/ui/mainmenu/title-sfpuc-hd-menu.png` (transparent, final display asset).
 - Optional female presentation: set a player record's `presentation` value to `female`; the game uses `assets/art/characters/soccer-fplayer2-sheet.png` (6 columns x 13 rows, 192 x 416).
 
-The matching editable raw artwork is kept as `menu-backgroundSF.png` and `soccer-fplayer2.png`. Intermediate conversions and superseded art are intentionally excluded from the repo.
+The matching editable raw artwork is kept as `menu-backgroundSF.png` and `soccer-fplayer2.png`. Raw editing sources for the title and tournament art live in `archive/raw-art/` (ignored by Godot via `.gdignore`, so they don't ship with the game). Intermediate conversions and superseded art are intentionally excluded from the repo.
+
+This repo was dead-code audited on 2026-07-13 (see [`docs/superpowers/audits/2026-07-13-dead-code-audit.md`](docs/superpowers/audits/2026-07-13-dead-code-audit.md)); the audit found no dead code or dead settings, only unused assets, which were pruned or archived as noted above.
+
+## Where This Repo Diverges From the Course
+
+This repo is pruned to exactly what the shipped SFPUC game uses, so a few
+things the videos build are intentionally absent here:
+
+- **Country flags and 8-team assets** — replaced by the four SFPUC
+  team cards; the quarterfinal round and its art are gone (4 teams need
+  only semifinals → final).
+- **The original `title.png` menu title art** — Part 23 builds the main
+  menu with the course's title texture; this repo replaces it with the
+  SFPUC title art described above (`title-sfpuc-hd-menu.png`), so
+  `title.png` and `title2.png` aren't present here.
+
+If you're following the videos and your build has something this repo
+lacks, that's expected — the course repo's checkpoint tags
+(https://github.com/nicolasbize/soccer-course/tags) remain the reference
+for the un-pruned version.
 
 ---
 
@@ -146,8 +166,8 @@ Video: https://youtu.be/fW3VAX5n9ks
 | Action | Player 1 | Player 2 |
 |---|---|---|
 | left / right / up / down | Arrow keys (`p1_left`, etc.) | WASD (`p2_left`, etc.) |
-| pass | `]` → `p1_pass` | `~` → `p2_pass` |
-| shoot | `[` → `p1_shoot` | Tab → `p2_shoot` |
+| pass | `[` → `p1_pass` | `~` → `p2_pass` |
+| shoot | `]` → `p1_shoot` | Tab → `p2_shoot` |
 
 Tip: keep pass/shoot keys far from the directional keys to avoid mid-game finger conflicts.
 
