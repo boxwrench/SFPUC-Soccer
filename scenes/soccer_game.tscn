@@ -13,6 +13,7 @@ scale = Vector2(5, 5)
 texture_filter = 1
 
 [node name="GameViewport" type="SubViewport" parent="GameViewportContainer"]
+canvas_item_default_texture_filter = 0
 size = Vector2i(280, 180)
 handle_input_locally = false
 render_target_update_mode = 4
