@@ -16,12 +16,26 @@ by Nicolas Bize.
   goalkeeper
 - Full match flow: kickoff, goals, celebrations, resets, overtime, game over
 
-## Run it
+## Play it (no install)
+
+Grab the portable Windows build from
+[**Releases**](https://github.com/boxwrench/SFPUC-Soccer/releases/latest):
+download the zip, unzip anywhere, double-click `SFPUC-Super-Soccer.exe`.
+Everything is packed into the one exe. (SmartScreen may warn because it's
+unsigned — click **More info → Run anyway**.)
+
+## Run it from source
 
 1. Install [Godot 4.4+](https://godotengine.org) (standard build).
 2. Clone this repo and open `project.godot` in Godot, then press **F5** —
    or on Windows, double-click `Launch SFPUC Soccer.vbs` (expects
    `godot.exe` on your PATH).
+
+To build the portable exe yourself: install the Godot export templates
+(Editor → Manage Export Templates), then run
+`godot --headless --export-release "Windows Desktop"` — the preset in
+`export_presets.cfg` writes `dist/SFPUC-Super-Soccer.exe` with the game
+data embedded.
 
 ### Controls
 
