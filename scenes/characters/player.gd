@@ -77,11 +77,8 @@ func _process(delta: float) -> void:
 func set_player_texture() -> void:
 	if presentation == "female":
 		player_sprite.texture = FEMALE_PLAYER_TEXTURE
-		player_sprite.material = null
 
 func set_shader_properties() -> void:
-	if presentation == "female":
-		return
 	player_sprite.material.set_shader_parameter("skin_color", skin_color)
 	var countries := DataLoader.get_countries()
 	var country_color := countries.find(country)
