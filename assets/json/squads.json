@@ -1,30 +1,32 @@
-﻿[
+[
     {
         "country":  "Water",
         "players":  [
                         {
-                            "name":  "R. Reservoir",
-                            "skin":  0,
+                            "name":  "Flo Stopper",
+                            "skin":  2,
                             "role":  0,
                             "speed":  62,
-                            "power":  110
+                            "power":  110,
+                            "presentation":  "female"
                         },
                         {
-                            "name":  "P. Pipeline",
-                            "skin":  1,
+                            "name":  "Phil Tration",
+                            "skin":  0,
                             "role":  1,
                             "speed":  68,
                             "power":  145
                         },
                         {
-                            "name":  "H. Hydrant",
-                            "skin":  2,
+                            "name":  "Sandy Filter",
+                            "skin":  1,
                             "role":  1,
                             "speed":  64,
-                            "power":  160
+                            "power":  160,
+                            "presentation":  "female"
                         },
                         {
-                            "name":  "F. Faucet",
+                            "name":  "Chlora Mine",
                             "skin":  0,
                             "role":  2,
                             "speed":  72,
@@ -32,15 +34,15 @@
                             "presentation":  "female"
                         },
                         {
-                            "name":  "A. Aqueduct",
-                            "skin":  1,
+                            "name":  "Walter Fall",
+                            "skin":  2,
                             "role":  3,
                             "speed":  74,
                             "power":  150
                         },
                         {
-                            "name":  "G. Gallon",
-                            "skin":  2,
+                            "name":  "Otto Zone",
+                            "skin":  1,
                             "role":  3,
                             "speed":  70,
                             "power":  155
@@ -51,43 +53,46 @@
         "country":  "Power",
         "players":  [
                         {
-                            "name":  "V. Voltage",
+                            "name":  "Millie Amp",
                             "skin":  1,
                             "role":  0,
                             "speed":  61,
-                            "power":  125
+                            "power":  125,
+                            "presentation":  "female"
                         },
                         {
-                            "name":  "C. Circuit",
+                            "name":  "Bea Breaker",
                             "skin":  2,
                             "role":  1,
                             "speed":  66,
-                            "power":  170
+                            "power":  170,
+                            "presentation":  "female"
                         },
                         {
-                            "name":  "A. Ampere",
+                            "name":  "Ohm Boyd",
                             "skin":  0,
                             "role":  1,
                             "speed":  67,
                             "power":  175
                         },
                         {
-                            "name":  "W. Watt",
-                            "skin":  1,
+                            "name":  "Connie Duit",
+                            "skin":  0,
                             "role":  2,
                             "speed":  71,
-                            "power":  165
+                            "power":  165,
+                            "presentation":  "female"
                         },
                         {
-                            "name":  "K. Kilowatt",
+                            "name":  "Sparky Volts",
                             "skin":  2,
                             "role":  3,
                             "speed":  73,
                             "power":  185
                         },
                         {
-                            "name":  "T. Transformer",
-                            "skin":  0,
+                            "name":  "Max Voltage",
+                            "skin":  1,
                             "role":  3,
                             "speed":  69,
                             "power":  180
@@ -98,43 +103,46 @@
         "country":  "Sewer",
         "players":  [
                         {
-                            "name":  "C. Clarifier",
+                            "name":  "Pete Trap",
                             "skin":  2,
                             "role":  0,
                             "speed":  60,
                             "power":  130
                         },
                         {
-                            "name":  "M. Mainline",
-                            "skin":  0,
+                            "name":  "Manny Hole",
+                            "skin":  1,
                             "role":  1,
                             "speed":  65,
                             "power":  175
                         },
                         {
-                            "name":  "V. Valve",
-                            "skin":  1,
+                            "name":  "Sue Ridge",
+                            "skin":  0,
                             "role":  1,
                             "speed":  64,
-                            "power":  170
+                            "power":  170,
+                            "presentation":  "female"
                         },
                         {
-                            "name":  "S. Sludge",
+                            "name":  "Claire Ifier",
                             "skin":  2,
                             "role":  2,
                             "speed":  67,
-                            "power":  160
+                            "power":  160,
+                            "presentation":  "female"
                         },
                         {
-                            "name":  "D. Digester",
-                            "skin":  0,
+                            "name":  "Effie Luent",
+                            "skin":  1,
                             "role":  3,
                             "speed":  70,
-                            "power":  168
+                            "power":  168,
+                            "presentation":  "female"
                         },
                         {
-                            "name":  "B. Biosolid",
-                            "skin":  1,
+                            "name":  "Sly Sludge",
+                            "skin":  0,
                             "role":  3,
                             "speed":  68,
                             "power":  178
@@ -145,43 +153,46 @@
         "country":  "Hetch Hetchy Water and Power",
         "players":  [
                         {
-                            "name":  "D. Dam",
+                            "name":  "Shauna O'Nessy",
                             "skin":  0,
                             "role":  0,
                             "speed":  63,
-                            "power":  120
+                            "power":  120,
+                            "presentation":  "female"
                         },
                         {
-                            "name":  "R. Reservoir",
-                            "skin":  1,
+                            "name":  "Rocky Granite",
+                            "skin":  2,
                             "role":  1,
                             "speed":  69,
                             "power":  150
                         },
                         {
-                            "name":  "M. Moccasin",
-                            "skin":  2,
+                            "name":  "Sierra Peaks",
+                            "skin":  1,
                             "role":  1,
                             "speed":  68,
-                            "power":  155
+                            "power":  155,
+                            "presentation":  "female"
                         },
                         {
-                            "name":  "C. Canyon",
-                            "skin":  0,
+                            "name":  "Tula Umne",
+                            "skin":  2,
                             "role":  2,
                             "speed":  73,
-                            "power":  145
+                            "power":  145,
+                            "presentation":  "female"
                         },
                         {
-                            "name":  "G. Granite",
-                            "skin":  1,
+                            "name":  "Kirk Wood",
+                            "skin":  0,
                             "role":  3,
                             "speed":  72,
                             "power":  172
                         },
                         {
-                            "name":  "T. Tuolumne",
-                            "skin":  2,
+                            "name":  "Mo Cassin",
+                            "skin":  1,
                             "role":  3,
                             "speed":  71,
                             "power":  165
