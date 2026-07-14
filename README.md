@@ -6,6 +6,10 @@ Power**. Based on the MIT-licensed video course
 [*Create a Soccer Game in Godot!*](https://github.com/nicolasbize/soccer-course)
 by Nicolas Bize.
 
+| ![Title screen](docs/screenshots/title-screen.png) | ![Gameplay](docs/screenshots/game-play.png) |
+|:---:|:---:|
+| Title screen | Kickoff at center pitch |
+
 ## Features
 
 - **Solo tournament:** four-team bracket (two semifinals → final)
