@@ -18,7 +18,9 @@ by Nicolas Bize.
 
 ## Play it (no install)
 
-Grab the portable Windows build from
+**In your browser:** [boxwrench.github.io/SFPUC-Soccer](https://boxwrench.github.io/SFPUC-Soccer/)
+
+**On Windows:** grab the portable build from
 [**Releases**](https://github.com/boxwrench/SFPUC-Soccer/releases/latest):
 download the zip, unzip anywhere, double-click `SFPUC-Super-Soccer.exe`.
 Everything is packed into the one exe. (SmartScreen may warn because it's
