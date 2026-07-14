@@ -46,7 +46,7 @@ The active runtime assets and behavior are:
 - Tournament background: `assets/art/ui/teamselection/tournament-screen2-fitted.png`.
 - Player-one and player-two control layouts use native-size, nearest-neighbor rendering for crisp text.
 - Main-menu title: `assets/art/ui/mainmenu/title-sfpuc-hd-menu.png` (transparent, final display asset).
-- Optional female presentation: set a player record's `presentation` value to `female`; the game uses `assets/art/characters/soccer-fplayer2-sheet.png` (6 columns x 13 rows, 192 x 416).
+- Optional female presentation: set a player record's `presentation` value to `female`; the game uses `assets/art/characters/soccer-fplayer2-sheet.png` (6 columns x 13 rows, 192 x 416). The sheet is drawn in the exact palette source colors the `replace_color` shader matches, so female players get team colors and skin tones at runtime just like male players. The shipped rosters field half-female, half-male squads with mixed skin tones.
 
 The matching editable raw artwork is kept as `menu-backgroundSF.png` and `soccer-fplayer2.png`. Raw editing sources for the title and tournament art live in `archive/raw-art/` (ignored by Godot via `.gdignore`, so they don't ship with the game). Intermediate conversions and superseded art are intentionally excluded from the repo.
 
@@ -74,6 +74,14 @@ things the videos build are intentionally absent here:
   `viewport_width`/`viewport_height` = `1400`/`900` and Stretch Mode
   `canvas_items`, rather than Part 1.4's `280`×`180` viewport with a
   `1400`×`900` override and Stretch Mode `viewport`.
+- **SubViewport texture filter** — the game world renders inside a
+  `280`×`180` `SubViewport` in `scenes/soccer_game.tscn`, and this repo
+  sets that node's `canvas_item_default_texture_filter` to `Nearest`.
+  The project-level Nearest setting (Part 1.4 step 4) only applies to
+  the root viewport — a SubViewport defaults to Linear, which blurs
+  sprites at fractional camera offsets and silently breaks the
+  `replace_color` shader's exact color matching (skin tones fall back
+  to light while large flat kit areas still swap).
 
 If you're following the videos and your build has something this repo
 lacks, that's expected — the course repo's checkpoint tags
@@ -123,7 +131,7 @@ Video: https://www.youtube.com/watch?v=__ZAKUIjxy0
 1. Open **Project > Project Settings** and enable **Advanced Settings**.
 2. **Display > Window:** Width = `280`, Height = `180` (the pixel-art resolution). Width Override = `1400`, Height Override = `900` (a 5× upscale for the actual window).
 3. **Stretch Mode** = `viewport`; **Scale Mode** = `integer` (keeps pixels perfectly square).
-4. **Rendering > Textures:** Default Texture Filter = `Nearest` (prevents blurry pixel art).
+4. **Rendering > Textures:** Default Texture Filter = `Nearest` (prevents blurry pixel art). Note: this setting only covers the root viewport — if the game later renders inside a `SubViewport` (as this repo's `scenes/soccer_game.tscn` does), set that node's **Canvas Item Default Texture Filter** to `Nearest` too, or sprites blur and the palette-swap shader's exact color matching quietly fails.
 
 ### 1.5 Import game assets
 
@@ -466,7 +474,7 @@ Video (conflicting links): https://youtu.be/rQkPgRpZsUE or https://www.youtube.c
 
 **This is the heart of the SFPUC customization** — see Section B for the full SFPUC roster file.
 
-1. Create `assets/json/squads.json`: an array of team objects, each with a `"team"` string and a `"players"` array. Each player: `{"name", "skin" (int), "role" (int), "speed" (int), "power" (int)}`.
+1. Create `assets/json/squads.json`: an array of team objects, each with a `"country"` string and a `"players"` array. Each player: `{"name", "skin" (int), "role" (int), "speed" (int), "power" (int)}`, plus an optional `"presentation": "female"`.
 2. Create `resources/player_resource.gd` (extends Resource):
    ```gdscript
    @export var full_name: String
@@ -678,12 +686,12 @@ Replace the country squads with SFPUC teams. Keep the same schema the DataLoader
   {
     "country": "Water",
     "players": [
-      {"name": "R. Reservoir", "skin": 0, "role": 2, "speed": 72, "power": 70},
-      {"name": "P. Pipeline",  "skin": 1, "role": 1, "speed": 68, "power": 65},
-      {"name": "H. Hydrant",   "skin": 2, "role": 0, "speed": 60, "power": 75},
-      {"name": "F. Faucet",    "skin": 0, "role": 1, "speed": 70, "power": 60},
-      {"name": "A. Aqueduct",  "skin": 1, "role": 0, "speed": 58, "power": 72},
-      {"name": "G. Gallon",    "skin": 2, "role": 3, "speed": 55, "power": 68}
+      {"name": "Flo Stopper",  "skin": 2, "role": 0, "speed": 62, "power": 110, "presentation": "female"},
+      {"name": "Phil Tration", "skin": 0, "role": 1, "speed": 68, "power": 145},
+      {"name": "Sandy Filter", "skin": 1, "role": 1, "speed": 64, "power": 160, "presentation": "female"},
+      {"name": "Chlora Mine",  "skin": 0, "role": 2, "speed": 72, "power": 135, "presentation": "female"},
+      {"name": "Walter Fall",  "skin": 2, "role": 3, "speed": 74, "power": 150},
+      {"name": "Otto Zone",    "skin": 1, "role": 3, "speed": 70, "power": 155}
     ]
   },
   { "country": "Power",        "players": ["...same shape, 6 players..."] },
@@ -691,6 +699,12 @@ Replace the country squads with SFPUC teams. Keep the same schema the DataLoader
   { "country": "Hetch Hetchy Water and Power", "players": ["...same shape..."] }
 ]
 ```
+
+`skin` is `0`/`1`/`2` (light/medium/dark), `role` is `0`–`3`
+(goalie/defense/midfield/offense per the shipped enum order), and
+`presentation: "female"` swaps the sprite sheet (omit it for the default
+male sprite). The shipped `squads.json` fields three female and three
+male players per team.
 
 Notes:
 

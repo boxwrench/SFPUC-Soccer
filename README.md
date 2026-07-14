@@ -45,7 +45,8 @@ video course.
 
 Quick version:
 
-- **Rosters:** edit `assets/json/squads.json` (names, roles, speed, power)
+- **Rosters:** edit `assets/json/squads.json` (names, roles, speed, power,
+  skin tone `0`–`2`, and optional `"presentation": "female"` per player)
 - **Team colors:** edit `assets/art/palettes/teams-color-palette.png`
   (one row per team; a shader recolors the shared spritesheet at runtime)
 - **Team cards/flags:** replace the PNGs mapped in `utils/flag_helper.gd`
